@@ -1,0 +1,112 @@
+{
+  "owner": "JUTZUGC",
+  "code": "JUTZUGC",
+  "project": {
+    "key": "aihot",
+    "nameCn": "AIHOT",
+    "repoName": "aihot-deploy-guide",
+    "oneLiner": "8.8k stars，MIT，自己找热点、自己写日报的行业热点站框架",
+    "officialRepo": "https://github.com/KKKKhazix/AIHOT",
+    "officialDocs": "https://github.com/KKKKhazix/AIHOT/blob/main/README.md",
+    "stars": "8.8k",
+    "license": "MIT",
+    "highlights": [
+      "六种信源：RSS、网页列表、JSON 接口、X 账号、公众号与外部推送",
+      "精选流程：预筛 + 两次独立评分，提示词与入选门槛全部可改",
+      "事件聚簇：同一件事只出现一次，后续进展挂在同一事件下",
+      "热点排行：48 小时内按独立来源计热度，重复抓取不重复计数",
+      "自动出刊：日报、周报、月报，出刊时间可在 site/site.ts 调整",
+      "对外出口：RSS、公开 API、MCP、llms.txt，人与 Agent 共用同一份内容"
+    ],
+    "mcpSupport": "AIHOT 站点自带 MCP、RSS 与公开 API 出口，部署后可在 /agent 页面复制接入方式；本仓库的 MCP 只提供部署步骤、模型配置与常见问题。",
+    "webuiUrl": "http://127.0.0.1:3000",
+    "adapterPorts": "",
+    "collectedAt": "2026-10-28",
+    "verification": [
+      [
+        "README 确认 Docker Compose 步骤、Node.js 24 与模型 Key 要求",
+        "已核对 2026-10-28"
+      ],
+      [
+        "仓库无 Release 二进制资产，部署依赖源码与 Docker",
+        "已核对 2026-10-28"
+      ],
+      [
+        "未实测部署（需要模型 API Key 与 Docker 环境）",
+        "说明 2026-10-28"
+      ],
+      [
+        "非目标宿主调用被拦截（HOST_NOT_ALLOWED）",
+        "已验证 2026-10-28"
+      ]
+    ],
+    "deploy": {
+      "type": "docker",
+      "requires": [
+        "node"
+      ],
+      "steps": [
+        "git clone https://github.com/KKKKhazix/AIHOT.git myhot",
+        "cd myhot",
+        "node -e \"const m=+process.versions.node.split('.')[0]; if(m<24){console.error('需要 Node.js 24 或更高');process.exit(1)}\"",
+        "read -r -p \"请输入 OpenAI 兼容模型 API Key: \" LLM_KEY",
+        "node scripts/init-env.ts --llm-key \"$LLM_KEY\"",
+        "docker compose up -d --build"
+      ],
+      "stepsPs": [
+        "git clone https://github.com/KKKKhazix/AIHOT.git myhot",
+        "cd myhot",
+        "node -e \"const m=+process.versions.node.split('.')[0]; if(m<24){console.error('需要 Node.js 24 或更高');process.exit(1)}\"",
+        "$LLM_KEY = Read-Host '请输入 OpenAI 兼容模型 API Key'",
+        "node scripts/init-env.ts --llm-key $LLM_KEY",
+        "docker compose up -d --build"
+      ],
+      "source": "https://github.com/KKKKhazix/AIHOT#跑起来"
+    },
+    "pitfalls": [
+      "Node 版本过低：init-env 需要 Node.js 24，先升级再执行",
+      "docker compose 起不来：确认 Docker Desktop 正在运行，且当前目录是 myhot",
+      "页面能开但一直没有内容：先在后台试抓一个信源，确认模型 Key 与网络都通",
+      "模型 401：检查 .env 的 LLM_BASE_URL、LLM_MODEL 与 LLM_API_KEY 是否匹配",
+      "出刊时间不对：改 site/site.ts 的 EDITION_TIMES 后重新构建",
+      "公网访问不了：默认只监听本机 3000，需要自己做反向代理与 HTTPS",
+      "成本失控：先在后台配置预算熔断，再增加信源与抓取频率"
+    ]
+  },
+  "gate": {
+    "allow": [
+      "dumate"
+    ],
+    "label": "百度搭子",
+    "url": "https://www.dumate.cn/",
+    "guideUrl": "https://github.com/JUTZUGC/aihot-deploy-guide",
+    "howToFix": [
+      "1. 打开 https://www.dumate.cn/ ，下载并安装「百度搭子」电脑端（Windows / macOS）",
+      "2. 用账号登录",
+      "3. 在对话窗口发送：你好，帮我从 github 部署 JUTZUGC/aihot-deploy-guide 到我的电脑上",
+      "4. 部署完成后，在同一对话窗口里继续使用"
+    ],
+    "hint": "请改用「百度搭子」部署后再使用；本工具没有网页版入口。",
+    "onError": "allow"
+  },
+  "keywords": [
+    "AIHOT 部署",
+    "AIHOT 教程",
+    "AI 热点站 自建",
+    "行业热点站 开源",
+    "AI 日报 自动生成",
+    "AIHOT Docker",
+    "自托管 新闻聚合",
+    "AIHOT 中文",
+    "热点监控 开源",
+    "aihot deploy guide"
+  ],
+  "topics": [
+    "ai",
+    "news",
+    "self-hosted",
+    "docker",
+    "rss",
+    "llm"
+  ]
+}

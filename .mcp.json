@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "aihot-guide": {
+      "command": "node",
+      "args": [
+        "mcp-server.mjs"
+      ]
+    }
+  }
+}
